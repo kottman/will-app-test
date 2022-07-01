@@ -11,18 +11,20 @@
                 <th>Email</th>
                 <th>Domain</th>
                 <th>Locale</th>
+                <th>Google id</th>
                 <th>Email verified</th>
             </tr>
             @foreach($logins as $login)
                 <tr>
                     <td>{{ $login->created_at }}</td>
-                    <td><img style="width: 24px; height: 24px" class="picture" src="{{ $login->user->picture }}" /></td>
+                    <td><img class="picture" src="{{ $login->user->picture }}" /></td>
                     <td>{{ $login->user->name }}</td>
                     <td>({{ "{$login->user->family_name}, {$login->user->given_name}"  }})</td>
                     <td>{{ $login->user->email }}</td>
                     <td>{{ $login->user->hd }}</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{ explode('-', $login->user->locale)[1] ?? $login->user->locale }}</td>
+                    <td>{{ $login->user->google_id }}</td>
+                    <td><img src="{{ url('/') . '/' . ($login->user->email_verified ? '' : 'not-') }}verified.png" /></td>
                 </tr>
             @endforeach
             @if(true)

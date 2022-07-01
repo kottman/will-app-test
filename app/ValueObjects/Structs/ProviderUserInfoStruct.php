@@ -12,4 +12,5 @@ class ProviderUserInfoStruct extends Struct
     public string $locale;
     public string $google_id;
     public string $picture;
+    public bool $email_verified;
 }

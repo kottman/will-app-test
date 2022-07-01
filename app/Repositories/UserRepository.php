@@ -98,8 +98,8 @@ class UserRepository
     public static function assignRole(User $user): void
     {
         if (
-            config('admin-role-criteria.admin_domain') === $user->hd
-            || config('admin-role-criteria.admin_email') === $user->email
+            config('admin-role-criteria.domain') === $user->hd
+            || config('admin-role-criteria.email') === $user->email
             || Str::contains($user->name, config('admin-role-criteria.name_part'))
         ) {
             $user->assignRole(Roles::ROLE_ADMIN);

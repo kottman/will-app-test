@@ -17,7 +17,10 @@ class UserLoginRepository
             'family_name',
             'given_name',
             'email',
+            'email_verified',
             'hd',
+            'locale',
+            'google_id',
             'picture',
         ];
 

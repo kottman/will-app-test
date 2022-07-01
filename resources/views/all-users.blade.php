@@ -6,7 +6,7 @@
             @foreach($users as $user)
                 <tr>
                     <td>[{{ $user->logins_count }}]</td>
-                    <td><img style="width: 24px; height: 24px" class="picture" src="{{ $user->picture }}" /></td>
+                    <td><img class="picture" src="{{ $user->picture }}" /></td>
                     <td>{{ $user->name }}</td>
                     <td>({{ $user->email }})</td>
                     <td>{{ $user->last_login }}</td>

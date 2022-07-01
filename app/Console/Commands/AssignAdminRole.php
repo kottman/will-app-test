@@ -14,7 +14,7 @@ class AssignAdminRole extends Command
 
     public function handle(): int
     {
-        $user = User::where('email', config('auth.admin_email'))->firstOrFail();
+        $user = User::where('email', config('admin-role-criteria.email'))->firstOrFail();
         $user->assignRole(Roles::ROLE_ADMIN);
 
         return Command::SUCCESS;

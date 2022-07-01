@@ -30,6 +30,7 @@ class User extends Authenticatable
         'locale',
         'picture',
         'google_id',
+        'email_verified',
     ];
 
     /**
@@ -50,6 +51,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'email_verified' => 'bool',
     ];
 
     public function logins(): HasMany
