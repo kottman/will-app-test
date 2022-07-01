@@ -4,13 +4,27 @@ namespace App\Repositories;
 
 use App\Models\UserLogin;
 use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Support\Arr;
 
 class UserLoginRepository
 {
-    public const ALL_LOGINS_PAGINATION = 2;
-
     public static function allLogins(): Paginator
     {
-        return UserLogin::with('user')->simplePaginate(static::ALL_LOGINS_PAGINATION);
+        $loginsPagination = (int)config('pagination.all_logins');
+        $userColumns = [
+            'id',
+            'name',
+            'family_name',
+            'given_name',
+            'email',
+            'hd',
+            'picture',
+        ];
+
+        return UserLogin::with([
+            'user' => fn ($query) => $query->select($userColumns)
+        ])
+            ->orderBy('created_at', 'desc')
+            ->simplePaginate($loginsPagination);
     }
 }

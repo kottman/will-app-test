@@ -11,6 +11,13 @@ use Illuminate\Support\Str;
 class UserRepository
 {
     protected User $user;
+    public const DETAILS_COLUMNS = [
+        'id',
+        'name',
+        'email',
+        'picture',
+        'last_login',
+    ];
 
     public function __construct(User $user)
     {
@@ -65,17 +72,13 @@ class UserRepository
 
     public static function allUsers(): Paginator
     {
+        $usersPagination = (int)config('pagination.all_users');
+
         return User::withLastLogin()
             ->withCount('logins')
-            ->select([
-                'id',
-                'name',
-                'email',
-                'picture',
-                'last_login',
-            ])
+            ->select(static::DETAILS_COLUMNS)
             ->orderBy('last_login', 'desc')
-            ->simplePaginate(2);
+            ->simplePaginate($usersPagination);
     }
 
     public static function storeFromProvider(ProviderUserInfoStruct $userInfoStruct): User

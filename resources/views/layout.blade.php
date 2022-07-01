@@ -17,14 +17,20 @@
     <style>
         body {
             font-family: 'Nunito', sans-serif;
+            background-color: #1a202c;
         }
         .alert-danger{color: red;}
         .user-details-container{color: white; border: 1px solid; padding: 5px; display: table}
         .user-details-container td{padding: 5px}
+        .user-details-container td img{width: 24px; height: 24px; border-radius: 5px}
+        .pagination-navigation-container nav {display: block;}
+        .pagination-navigation-container nav a, .pagination-navigation-container nav span{padding: 0 5px}
+        .pagination-navigation-container nav a:first-child, .pagination-navigation-container nav span:first-child{float: left}
+        .pagination-navigation-container nav a:last-child, .pagination-navigation-container nav span:last-child{float: right}
     </style>
 </head>
 <body class="antialiased">
-<div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
+<div class="relative flex items-top justify-center min-h-screen dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
     @if (Route::has('login'))
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             @auth
