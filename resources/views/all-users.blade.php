@@ -12,6 +12,9 @@
                     <td>{{ $user->last_login }}</td>
                 </tr>
             @endforeach
+                <tr>
+                    <td colspan="5" class="pagination-navigation-container">{{ $users->links() }}</td>
+                </tr>
         </table>
     </div>
 @endsection

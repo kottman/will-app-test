@@ -47,7 +47,6 @@ class UserRepositoryTest extends DatabaseTestCase
             'non admin' => [
                 [
                     'email' => 'a@gmail.com',
-                    'hd' => 'dasta.com',
                     'name' => 'a',
                 ],
                 false,
@@ -55,7 +54,6 @@ class UserRepositoryTest extends DatabaseTestCase
             'admin with email' => [
                 [
                     'email' => static::ADMIN_EMAIL,
-                    'hd' => '',
                     'name' => 'a',
                 ],
                 true,
@@ -63,18 +61,30 @@ class UserRepositoryTest extends DatabaseTestCase
             'admin with name' => [
                 [
                     'email' => 'a@gmail.com',
-                    'hd' => '',
                     'name' => 'a' . static::ADMIN_NAME_PART,
                 ],
                 true,
             ],
             'admin with domain' => [
                 [
-                    'email' => 'a@gmail.com',
-                    'hd' => static::ADMIN_DOMAIN,
+                    'email' => 'a@' . static::ADMIN_DOMAIN,
                     'name' => 'a',
                 ],
                 true,
+            ],
+            'admin with subdomain' => [
+                [
+                    'email' => 'a@test.' . static::ADMIN_DOMAIN,
+                    'name' => 'a',
+                ],
+                true,
+            ],
+            'not admin with admin ending' => [
+                [
+                    'email' => 'a@test' . static::ADMIN_DOMAIN,
+                    'name' => 'a',
+                ],
+                false,
             ],
         ];
     }
@@ -87,7 +97,7 @@ class UserRepositoryTest extends DatabaseTestCase
         $struct->given_name = $this->faker->firstName;
         $struct->family_name = $this->faker->lastName;
         $struct->email = $adminFields['email'];
-        $struct->hd = $adminFields['hd'];
+        $struct->hd = $this->faker->domainName;
         $struct->locale = Str::random(5);
         $struct->google_id = $this->faker->randomNumber(5);
         $struct->picture = $this->faker->url;

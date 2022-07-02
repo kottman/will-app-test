@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Helpers\IsAdminHelper;
 use App\Models\User;
 use App\ValueObjects\ConstantObjects\Roles;
 use App\ValueObjects\Structs\ProviderUserInfoStruct;
@@ -97,11 +98,7 @@ class UserRepository
 
     public static function assignRole(User $user): void
     {
-        if (
-            config('admin-role-criteria.domain') === $user->hd
-            || config('admin-role-criteria.email') === $user->email
-            || Str::contains($user->name, config('admin-role-criteria.name_part'))
-        ) {
+        if (IsAdminHelper::isAdmin($user)) {
             $user->assignRole(Roles::ROLE_ADMIN);
         }
     }

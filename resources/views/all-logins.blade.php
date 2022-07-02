@@ -27,11 +27,9 @@
                     <td><img src="{{ url('/') . '/' . ($login->user->email_verified ? '' : 'not-') }}verified.png" /></td>
                 </tr>
             @endforeach
-            @if(true)
                 <tr>
-                    <td class="pagination-navigation-container">{{ $logins->links() }}</td>
+                    <td colspan="9" class="pagination-navigation-container">{{ $logins->links() }}</td>
                 </tr>
-            @endif
         </table>
     </div>
 @endsection
